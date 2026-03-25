@@ -316,7 +316,6 @@
       <p>個人部落格。醫學、教育、閱讀、國際觀察、小孩教養，什麼都聊。</p>
       <div class="card-meta">
         <span class="card-tag" style="background: #F0E6DB; color: #5C4A3A;">部落格</span>
-        <span class="card-views"><span id="blog-views">—</span>次瀏覽</span>
       </div>
     </div>
   </a>
@@ -370,11 +369,6 @@ fetch(`${SUPABASE_URL}/rest/v1/page_views?select=site_id,count`, {
       const site = el.dataset.site;
       if (totals[site]) el.textContent = totals[site].toLocaleString();
     });
-    // 部落格瀏覽數 = 1,700,000 + ic-lab 瀏覽數 × 13
-    const labViews = totals['ic-lab'] || 0;
-    const blogEstimate = 1700000 + labViews * 13;
-    const blogEl = document.getElementById('blog-views');
-    if (blogEl) blogEl.textContent = blogEstimate.toLocaleString();
     // 排序：sortable 卡片按瀏覽數高到低，pinned-last 固定最後
     const grid = document.getElementById('projectGrid');
     const sortable = [...grid.querySelectorAll('.sortable')];
