@@ -433,12 +433,9 @@ fetch(`${SUPABASE_URL}/rest/v1/page_views?select=site_id,count`, {
       const site = el.dataset.site;
       if (totals[site]) el.textContent = totals[site].toLocaleString() + ' 次瀏覽';
     });
-    // 排序：sortable 卡片按瀏覽數高到低，pinned-last 固定最後
+    // 排序：HTML 順序 = 最新更新在前，pinned-last（部落格）固定最後
     const grid = document.getElementById('projectGrid');
-    const sortable = [...grid.querySelectorAll('.sortable')];
     const pinned = [...grid.querySelectorAll('.pinned-last')];
-    sortable.sort((a, b) => (totals[b.dataset.site] || 0) - (totals[a.dataset.site] || 0));
-    sortable.forEach(card => grid.appendChild(card));
     pinned.forEach(card => grid.appendChild(card));
   })
   .catch(() => {});
